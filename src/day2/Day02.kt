@@ -15,8 +15,6 @@ fun main() {
         val instructions = input.map { Pair(it.split(" ")[0], it.split(" ")[1].toInt()) }.toList()
         var aim = 0
         var forwardInstructions = 0
-        var upInstructions = 0
-        var downInstructions = 0
         var depth = 0
         instructions.forEach {
             when (it.first) {
@@ -26,11 +24,9 @@ fun main() {
                 }
                 "down" -> {
                     aim += it.second
-                    downInstructions += it.second
                 }
                 else -> {
                     aim -= it.second
-                    upInstructions += it.second
                 }
             }
         }
