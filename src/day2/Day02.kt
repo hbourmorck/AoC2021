@@ -4,11 +4,12 @@ import readInput
 
 fun main() {
     fun part1(input: List<String>): Int {
-        val instructions = input.map { Pair(it.split(" ")[0], it.split(" ")[1].toInt()) }.toList()
-        val forwardInstructions = instructions.filter { it.first == "forward" }.sumOf { it.second }
-        val upInstructions = instructions.filter { it.first == "up" }.sumOf { it.second }
-        val downInstructions = instructions.filter { it.first == "down" }.sumOf { it.second }
-        return forwardInstructions * (downInstructions - upInstructions)
+        val instructions = input.map { Pair(it.split(" ")[0], it.split(" ")[1].toInt()) }.
+                fold(mutableMapOf<String, Int>()) { acc, pair ->
+                    acc[pair.first] = (acc[pair.first] ?: 0).plus(pair.second)
+                    acc
+                }
+        return instructions["forward"]!! * (instructions["down"]!! - instructions["up"]!!)
     }
 
     fun part2(input: List<String>): Int {
