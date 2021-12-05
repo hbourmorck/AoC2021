@@ -1,23 +1,25 @@
 package day5
 
+import Line
+import Point
 import readInput
 import kotlin.math.abs
 import kotlin.math.max
 
 fun main() {
-    fun getLines(input:List<String>): List<List<Pair<Int, Int>>>
+    fun getLines(input:List<String>): List<Line>
     {
-        return input.map { it.split(" -> ").map { coordinate -> Pair(coordinate.split(",")[0].toInt(), coordinate.split(",")[1].toInt()) } }
+        return input.flatMap { it.split(" -> ").map { coordinate -> Point(coordinate.split(",")[0].toInt(), coordinate.split(",")[1].toInt()) }.zipWithNext{start, end -> Line(start, end)} }
     }
 
-    fun move(motions: List<List<Pair<Int, Int>>>) : MutableMap<Pair<Int,Int>, Int>
+    fun move(motions: List<Line>) : MutableMap<Pair<Int,Int>, Int>
     {
         val points: MutableMap<Pair<Int,Int>, Int> = mutableMapOf()
         motions.forEach {
-            val startXPoint = it[0].first
-            val endXPoint = it[1].first
-            val startYPoint = it[0].second
-            val endYPoint = it[1].second
+            val startXPoint = it.startPoint.X
+            val endXPoint = it.endPoint.X
+            val startYPoint = it.startPoint.Y
+            val endYPoint = it.endPoint.Y
             val distance = max(abs(startXPoint - endXPoint), abs(startYPoint - endYPoint))
             for(i in 0..distance)
             {
@@ -31,19 +33,14 @@ fun main() {
 
     fun part1(input: List<String>): Int {
         val lines = getLines(input)
-        val motions = lines.filter {
-            (it[0].first == it[1].first) || //Vertical filter
-            (it[0].second == it[1].second) //Horizontal filter
-        }
-        return move(motions).count{it.value >=2}
+        val motions = lines.filter { it.isHorizontal() || it.isVertical() }
+        return move(motions).count{it.value >= 2}
     }
 
     fun part2(input: List<String>): Int {
         val lines = getLines(input)
         val motions = lines.filter {
-            (it[0].first == it[1].first) || //Vertical filter
-            (it[0].second == it[1].second) || //Horizontal filter
-            (abs(it[0].first - it[1].first) == abs(it[0].second - it[1].second)) //Diagonal filter
+            it.isVertical() || it.isHorizontal() || it.isDiagonal45Degree()
         }
         return move(motions).count{it.value >=2}
     }
