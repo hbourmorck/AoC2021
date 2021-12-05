@@ -32,8 +32,8 @@ fun main() {
     fun part1(input: List<String>): Int {
         val lines = getLines(input)
         val motions = lines.filter {
-            vertical@(it[0].first == it[1].first) ||
-            horizontal@(it[0].second == it[1].second)
+            (it[0].first == it[1].first) || //Vertical filter
+            (it[0].second == it[1].second) //Horizontal filter
         }
         return move(motions).count{it.value >=2}
     }
@@ -41,9 +41,9 @@ fun main() {
     fun part2(input: List<String>): Int {
         val lines = getLines(input)
         val motions = lines.filter {
-            vertical@(it[0].first == it[1].first) ||
-            horizontal@(it[0].second == it[1].second) ||
-            diagonal@(abs(it[0].first - it[1].first) == abs(it[0].second - it[1].second))
+            (it[0].first == it[1].first) || //Vertical filter
+            (it[0].second == it[1].second) || //Horizontal filter
+            (abs(it[0].first - it[1].first) == abs(it[0].second - it[1].second)) //Diagonal filter
         }
         return move(motions).count{it.value >=2}
     }
