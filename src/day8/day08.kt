@@ -49,7 +49,7 @@ fun main() {
                     else -> "9"
                 }
             }
-            numbersDisplayed.add(it.second.map { number -> mapNumber(number) }.joinToString("").toInt())
+            numbersDisplayed.add(it.second.joinToString("") { number -> mapNumber(number) }.toInt())
         }
 
         return numbersDisplayed.sum()
