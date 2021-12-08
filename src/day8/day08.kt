@@ -5,10 +5,10 @@ import java.util.*
 
 fun main() {
     fun part1(input: List<String>): Int {
-        return input.map {
+        return input.sumOf {
             it.split(("|"))[1].split(" ")
                 .count { (it.length == 4 || it.length == 7 || it.length == 2 || it.length == 3) }
-        }.sum()
+        }
     }
 
     fun part2(input: List<String>): Int {
