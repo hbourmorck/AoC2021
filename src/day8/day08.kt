@@ -23,16 +23,16 @@ fun main() {
             val number4 = it.first.first { it.size == 4 }
             val number1 = it.first.first { it.size == 2 }
             val number7 = it.first.first { it.size == 3 }
-            val numbersWith5Segment = it.first.filter { it.size == 5 }
-            val numberWith6Segment = it.first.filter { it.size == 6 }
-            val number6 = numberWith6Segment.find { !it.contains(number1.elementAt(0)) || !it.contains(number1.elementAt(1)) }
-            val number9 = numberWith6Segment.find {number4.map { char -> it.contains(char) }.count{it} == 4}
-            val number0 = numberWith6Segment.find { it != number9 && it != number6}
+            val numbersWith5Segments = it.first.filter { it.size == 5 }
+            val numbersWith6Segments = it.first.filter { it.size == 6 }
+            val number6 = numbersWith6Segments.find { !it.contains(number1.elementAt(0)) || !it.contains(number1.elementAt(1)) }
+            val number9 = numbersWith6Segments.find {number4.map { char -> it.contains(char) }.count{it} == 4}
+            val number0 = numbersWith6Segments.find { it != number9 && it != number6}
             val segment2 = number1.first { !number6!!.contains(it) }
             val segment3 = number1.first { it != segment2 }
-            val number2 = numbersWith5Segment.find { !it.contains(segment3) }
-            val number5 = numbersWith5Segment.find { !it.contains(segment2) }
-            val number3 = numbersWith5Segment.find { it != number2 && it!=number5 }
+            val number2 = numbersWith5Segments.find { !it.contains(segment3) }
+            val number5 = numbersWith5Segments.find { !it.contains(segment2) }
+            val number3 = numbersWith5Segments.find { it != number2 && it!=number5 }
 
             fun mapNumber(numberDisplayed:SortedSet<Char>):String
             {
