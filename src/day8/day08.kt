@@ -7,7 +7,7 @@ fun main() {
     fun part1(input: List<String>): Int {
         return input.map {
             it.split(("|"))[1].split(" ")
-                .filter { (it.length == 4 || it.length == 7 || it.length == 2 || it.length == 3) }.count()
+                .count { (it.length == 4 || it.length == 7 || it.length == 2 || it.length == 3) }
         }.sum()
     }
 
