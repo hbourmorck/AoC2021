@@ -15,6 +15,17 @@ fun String.md5(): String = BigInteger(1, MessageDigest.getInstance("MD5").digest
 
 
 class Point(val X:Int, val Y: Int)
+{
+
+    fun neighbors(): List<Point> =
+        listOf(
+            Point(X , Y + 1),
+            Point(X , Y - 1),
+            Point(X + 1 , Y),
+            Point(X - 1 , Y)
+        )
+}
+class PointValue(val position:Point, val value: Int)
 
 class Line(val startPoint:Point, val endPoint: Point)
 {

@@ -1,4 +1,4 @@
-package day6
+package day8
 
 import readInput
 import java.util.*
