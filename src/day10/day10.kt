@@ -9,19 +9,18 @@ fun main() {
     fun part1(input: List<String>): Int {
         val missingChar = input.map {
             var visited = mutableListOf<Char>()
-            it.forEachIndexed { index, c ->
-                   if (c in chunks.keys)
-                   {
-                       visited.add(c)
-                   }
-                else if(c == chunks[visited.last()])
-                   {
-                    visited.removeLast()
-                   }
-                else
-                   {
-                       return@map c
-                   }
+            it.forEach { c ->
+                when (c) {
+                    in chunks.keys -> {
+                        visited.add(c)
+                    }
+                    chunks[visited.last()] -> {
+                        visited.removeLast()
+                    }
+                    else -> {
+                        return@map c
+                    }
+                }
             }
             return@map ' '
         }
