@@ -14,20 +14,32 @@ fun readInput(parent:String, name: String) = File(parent, "$name.txt").readLines
 fun String.md5(): String = BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteArray())).toString(16)
 
 
-class Point(val X:Int, val Y: Int)
+class Point2D(val X:Int, val Y: Int)
 {
 
-    fun neighbors(): List<Point> =
-        listOf(
-            Point(X , Y + 1),
-            Point(X , Y - 1),
-            Point(X + 1 , Y),
-            Point(X - 1 , Y)
-        )
+    fun neighbors(withDiagonal: Boolean = false): List<Point2D> =
+        when {
+            withDiagonal -> listOf(
+                Point2D(X, Y + 1),
+                Point2D(X, Y - 1),
+                Point2D(X + 1, Y),
+                Point2D(X - 1, Y),
+                Point2D(X-1, Y-1),
+                Point2D(X-1, Y+1),
+                Point2D(X+1, Y+1),
+                Point2D(X-1, Y+1)
+            )
+            else -> listOf(
+                Point2D(X, Y + 1),
+                Point2D(X, Y - 1),
+                Point2D(X + 1, Y),
+                Point2D(X - 1, Y)
+            )
+        }
 }
-class PointValue(val position:Point, val value: Int)
+class PointValue(val position:Point2D, val value: Int)
 
-class Line(val startPoint:Point, val endPoint: Point)
+class Line(val startPoint:Point2D, val endPoint: Point2D)
 {
     fun isHorizontal() = startPoint.Y == endPoint.Y
     fun isVertical() = startPoint.X == endPoint.X

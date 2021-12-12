@@ -1,7 +1,7 @@
 package day5
 
 import Line
-import Point
+import Point2D
 import readInput
 import kotlin.math.abs
 import kotlin.math.max
@@ -9,7 +9,7 @@ import kotlin.math.max
 fun main() {
     fun getLines(input:List<String>): List<Line>
     {
-        return input.flatMap { it.split(" -> ").map { coordinate -> Point(coordinate.split(",")[0].toInt(), coordinate.split(",")[1].toInt()) }.zipWithNext{start, end -> Line(start, end)} }
+        return input.flatMap { it.split(" -> ").map { coordinate -> Point2D(coordinate.split(",")[0].toInt(), coordinate.split(",")[1].toInt()) }.zipWithNext{ start, end -> Line(start, end)} }
     }
 
     fun move(motions: List<Line>) : MutableMap<Pair<Int,Int>, Int>

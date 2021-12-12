@@ -1,10 +1,7 @@
 package day9
 //Solution copied from other... Not my code!
 
-import Point
-import PointValue
 import readInput
-import java.util.*
 import kotlin.contracts.ExperimentalContracts
 import kotlin.contracts.InvocationKind
 import kotlin.contracts.contract
