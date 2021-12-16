@@ -17,6 +17,14 @@ fun String.md5(): String = BigInteger(1, MessageDigest.getInstance("MD5").digest
 class Point2D(val X:Int, val Y: Int)
 {
 
+    override fun equals(other: Any?): Boolean {
+        if(other is Point2D)
+        {
+            return other.Y == this.Y && other.X == this.X
+        }
+        return false
+    }
+
     fun neighbors(withDiagonal: Boolean = false): List<Point2D> =
         when {
             withDiagonal -> listOf(
